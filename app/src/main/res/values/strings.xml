@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Obrero</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="deconnexion"><u>déconnexion</u></string>
+    <string name="name"><b>nom et prenom</b></string>
+    <string name="email">foulen@gmail.com</string>
+    <string name="title_activity_maps">Map</string>
+</resources>
