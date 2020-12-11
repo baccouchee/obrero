@@ -32,7 +32,7 @@ public class PrestationFragment extends Fragment {
     TextView adresse3;
     TextView prenom;
     TextView pemail;
-    Button supp;
+    Button supps;
 
     @Nullable
     @Override
