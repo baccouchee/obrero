@@ -41,6 +41,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        Bundle extras = getIntent().getExtras();
+        int value = extras.getInt("key");
+        extras.putInt("key", value);
 
         switch (item.getItemId()) {
             case R.id.nav_message:
@@ -49,21 +52,22 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 break;
             case R.id.nav_chat:
                 CompteFragment fragment = new CompteFragment();
-                Bundle extras = getIntent().getExtras();
-                int value = extras.getInt("key");
-                extras.putInt("key", value);
+
                 fragment.setArguments(extras);
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                         fragment).commit();
                 break;
             case R.id.nav_profile:
+
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                         new LocationFragment()).commit();
                 break;
 
             case  R.id.nav_getpro:
+                GetProFragment fragment1 = new GetProFragment();
+                fragment1.setArguments(extras);
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new GetProFragment()).commit();
+                        fragment1).commit();
                 break;
 
             case R.id.nav_share:

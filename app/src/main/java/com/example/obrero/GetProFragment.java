@@ -31,18 +31,26 @@ Button suivant;
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        Bundle bundle = this.getArguments();
+        int i = bundle.getInt("key");
+        System.out.println("ccc"+i);
+
+        Bundle bundle1 = new Bundle();
+        bundle1.putInt("key1", i);
+
+
         suivant = getActivity().findViewById(R.id.suivant);
         suivant.setOnClickListener(new View.OnClickListener() {
             @SuppressLint("ResourceType")
             @Override
             public void onClick(View v) {
-                GetProoFragment nextFrag= new GetProoFragment();
+                GetProoFragment fragment = new GetProoFragment();
+                fragment.setArguments(bundle1);
                 getActivity().getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.fragment_getprooo, nextFrag, "findThisFragment")
+                        .replace(R.id.fragment_getprooo, fragment, "findThisFragment")
                         .addToBackStack(null)
                         .commit();
 
-                suivant.setVisibility(View.GONE);
             }
         });
 

@@ -35,6 +35,7 @@ public class GetProoFragment extends Fragment {
     EditText debut;
     EditText fin;
 
+    Button suivant;
     Button valider;
 
     @Nullable
@@ -47,7 +48,14 @@ public class GetProoFragment extends Fragment {
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        suivant = getActivity().findViewById(R.id.suivant);
+        suivant.setVisibility(View.GONE);
+
+
         super.onViewCreated(view, savedInstanceState);
+        Bundle bundle1 = this.getArguments();
+        int i = bundle1.getInt("key1");
+
         retrofit = new Retrofit.Builder()
                 .baseUrl(BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
@@ -75,7 +83,7 @@ public class GetProoFragment extends Fragment {
 
                 else {
 
-                    Call<Void> call = retrofitInterface.getPro(map, 23);
+                    Call<Void> call = retrofitInterface.getPro(map, i);
                     call.enqueue(new Callback<Void>() {
                         @Override
                         public void onResponse(Call<Void> call, Response<Void> response) {

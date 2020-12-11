@@ -36,6 +36,8 @@ public class CompteFragment extends Fragment {
     TextView pemail;
     Button supp;
 
+    Button pres;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -138,6 +140,23 @@ supp.setOnClickListener(new View.OnClickListener() {
 
 
         });
+
+
+        pres = getActivity().findViewById(R.id.pres);
+        pres.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                PrestationFragment fragment = new PrestationFragment();
+
+                getActivity().getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.fragment_compte, fragment, "findThisFragment")
+                        .addToBackStack(null)
+                        .commit();
+
+
+            }
+        });
+
 
         super.onViewCreated(view, savedInstanceState);
     }
