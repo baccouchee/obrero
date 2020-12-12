@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -35,7 +36,7 @@ public class CategorieFragment extends Fragment {
     private String BASE_URL = "http://10.0.2.2:3000";
 
     private String test6;
-
+Spinner spinner;
     ListView listView;
 String test5;
     @Nullable
@@ -64,14 +65,15 @@ String test5;
                     for (Categories post : categories) {
                         test5 = post.getNom();
                         list.add(test5);
-                        listView = getActivity().findViewById(R.id.listView);
+                        spinner = getActivity().findViewById(R.id.spinner);
                         ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(),
-                                android.R.layout.simple_list_item_1,list);
-                        listView.setAdapter(adapter);
-                        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                                android.R.layout.simple_spinner_item,list);
+                        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                        spinner.setAdapter(adapter);
+                        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                             @Override
-                            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                                String item = (String) listView.getItemAtPosition(position);
+                            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                                String item = (String) spinner.getItemAtPosition(position);
                                 Call<List<Prestation>> call1 = retrofitInterface.getAllPrestation();
                                 call1.enqueue(new Callback<List<Prestation>>() {
                                     @Override
@@ -80,14 +82,18 @@ String test5;
                                             List<Prestation> prestations = response.body();
                                             for (Prestation pres : prestations) {
                                                 test6 = pres.getNomC();
-if (test6.equals(item)){
-    PrestationByCatFragment fragment = new PrestationByCatFragment();
-    getActivity().getSupportFragmentManager().beginTransaction()
-            .replace(R.id.fragment_categorie, fragment, "findThisFragment")
-            .addToBackStack(null)
-            .commit();
+                                                if (test6.equals(item)){
+                                                    PrestationByCatFragment fragment = new PrestationByCatFragment();
+                                                    Bundle bundle1 = new Bundle();
+                                                    bundle1.putString("key2", item);
+                                                    fragment.setArguments(bundle1);
+                                                    getActivity().getSupportFragmentManager().beginTransaction()
+                                                            .replace(R.id.fragment_categorie, fragment, "findThisFragment")
+                                                            .addToBackStack(null)
+                                                            .commit();
 
-          }
+                                                }
+
 
                                             }
                                         }
@@ -100,6 +106,11 @@ if (test6.equals(item)){
                                                 "erreur", Toast.LENGTH_LONG).show();
                                     }
                                 });
+                            }
+
+                            @Override
+                            public void onNothingSelected(AdapterView<?> parent) {
+
                             }
                         });
 

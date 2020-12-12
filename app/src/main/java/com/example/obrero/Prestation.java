@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName;
 public class Prestation {
 
     private int idPres;
-    private String nom;
+    private String Nom;
     private String description;
     private float tarif;
     private int idU;
@@ -23,11 +23,11 @@ public class Prestation {
     }
 
     public String getNom() {
-        return nom;
+        return Nom;
     }
 
     public void setNom(String nom) {
-        this.nom = nom;
+        this.Nom = Nom;
     }
 
     public String getDescription() {

@@ -31,7 +31,7 @@ public interface RetrofitInterface {
     @GET("/prestation")
     Call<List<Prestation>> getAllPrestation();
 
-    @GET("/prestation/{nomC}")
+    @GET("/pres/{nomC}")
     Call<List<Prestation>> getPrestation(@Path("nomC") String nomC);
 
     @POST("/getpro/{id}")
