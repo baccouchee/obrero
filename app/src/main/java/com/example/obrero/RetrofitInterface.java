@@ -19,11 +19,14 @@ public interface RetrofitInterface {
     @POST("/signup")
     Call<Void> executeSignup(@Body HashMap<String, String> map);
 
-    @POST("/prestation")
-    Call<Void> executePrestation(@Body HashMap<String, String> map);
+    @POST("/prestation/{id}")
+    Call<Void> addPrestation(@Body HashMap<String, String> map, @Path("id") int idUser);
 
     @GET("/Users/{id}")
     Call<List<LoginResult>> getUsers(@Path("id") int idUser);
+
+    @GET("/Categories")
+    Call<List<Categories>> getCategories();
 
     @POST("/getpro/{id}")
     Call<Void> getPro(@Body HashMap<String, String> map, @Path("id") int idUser);

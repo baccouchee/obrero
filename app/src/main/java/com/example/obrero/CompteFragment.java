@@ -52,6 +52,9 @@ public class CompteFragment extends Fragment {
         Bundle bundle = this.getArguments();
         int i = bundle.getInt("key");
 
+        Bundle bundle1 = new Bundle();
+        bundle1.putInt("key1", i);
+
 
         retrofit = new Retrofit.Builder()
                 .baseUrl(BASE_URL)
@@ -147,7 +150,7 @@ supp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 PrestationFragment fragment = new PrestationFragment();
-
+                fragment.setArguments(bundle1);
                 getActivity().getSupportFragmentManager().beginTransaction()
                         .replace(R.id.fragment_compte, fragment, "findThisFragment")
                         .addToBackStack(null)

@@ -2,53 +2,131 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/fragment_prestation"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/profil">
+    android:background="@drawable/profil" >
 
-
-    <TextView
-        android:id="@+id/adresse3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text=""
-        android:textColor="@color/greylight"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.501"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/pemail"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <TextView
-        android:id="@+id/prenom"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/book"
-        android:text=""
+    <EditText
+        android:id="@+id/tarifP"
+        android:layout_width="218dp"
+        android:layout_height="35dp"
+        android:background="@drawable/intput"
+        android:ems="10"
+        android:inputType="numberDecimal"
+        android:text="Tarif"
         android:textColor="@color/black"
-        android:textSize="25sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/descP"
+        app:layout_constraintVertical_bias="0.043" />
+
+    <EditText
+        android:id="@+id/nomP"
+        android:layout_width="218dp"
+        android:layout_height="35dp"
+        android:background="@drawable/intput"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Nom"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.305" />
+        app:layout_constraintVertical_bias="0.474" />
+
+    <EditText
+        android:id="@+id/descP"
+        android:layout_width="218dp"
+        android:layout_height="35dp"
+        android:background="@drawable/intput"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Description"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/nomP"
+        app:layout_constraintVertical_bias="0.04" />
+
+    <EditText
+        android:id="@+id/photoP"
+        android:layout_width="218dp"
+        android:layout_height="35dp"
+        android:background="@drawable/intput"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Photo"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tarifP"
+        app:layout_constraintVertical_bias="0.051" />
+
+    <Button
+        android:id="@+id/vald"
+        android:layout_width="86dp"
+        android:layout_height="39dp"
+        android:background="@drawable/buttonb"
+        android:text="valider"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spinner1"
+        app:layout_constraintVertical_bias="0.165" />
 
     <TextView
-        android:id="@+id/pemail"
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/heavy"
+        android:text="SERVICE !"
+        android:textColor="@color/black"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.255"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.359" />
+
+    <TextView
+        android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/lightt"
-        android:text=""
-        android:textColor="@color/greylight"
-        android:textSize="20sp"
+        android:text="AJOUTER VOTRE"
+        android:textColor="@color/black"
+        android:textSize="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.501"
+        app:layout_constraintHorizontal_bias="0.3"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/prenom"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.313" />
 
+    <Spinner
+        android:id="@+id/spinner1"
+        android:layout_width="218dp"
+        android:layout_height="35dp"
+        android:background="@drawable/intput"
+
+        android:spinnerMode="dropdown"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/photoP"
+        app:layout_constraintVertical_bias="0.058" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

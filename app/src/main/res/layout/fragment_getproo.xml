@@ -26,9 +26,10 @@
         android:id="@+id/debut"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/intput"
+
         android:ems="10"
         android:inputType="time"
+        android:background="@drawable/intput"
         android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -57,8 +58,9 @@
         android:id="@+id/textv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/heavy"
+
         android:text="DEVENEZ PRO !"
+        android:fontFamily="@font/heavy"
         android:textColor="@color/black"
         android:textSize="25dp"
         app:layout_constraintBottom_toBottomOf="parent"
