@@ -28,6 +28,12 @@ public interface RetrofitInterface {
     @GET("/Categories")
     Call<List<Categories>> getCategories();
 
+    @GET("/prestation")
+    Call<List<Prestation>> getAllPrestation();
+
+    @GET("/prestation/{nomC}")
+    Call<List<Prestation>> getPrestation(@Path("nomC") String nomC);
+
     @POST("/getpro/{id}")
     Call<Void> getPro(@Body HashMap<String, String> map, @Path("id") int idUser);
 

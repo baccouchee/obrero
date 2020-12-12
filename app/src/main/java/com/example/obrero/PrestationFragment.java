@@ -33,6 +33,7 @@ public class PrestationFragment extends Fragment {
     private RetrofitInterface retrofitInterface;
     private String BASE_URL = "http://10.0.2.2:3000";
     private String test5;
+
     private String test3;
     private String test4;
     private String test1;
@@ -78,6 +79,7 @@ public class PrestationFragment extends Fragment {
         photoP= getActivity().findViewById(R.id.photoP);
 
         List<String> list = new ArrayList<String>();
+        List<String> list2 = new ArrayList<String>();
         Call<List<Categories>> call = retrofitInterface.getCategories();
         call.enqueue(new Callback<List<Categories>>() {
             @Override
@@ -95,21 +97,21 @@ public class PrestationFragment extends Fragment {
                         System.out.println(list);
                         dropdown = getActivity().findViewById(R.id.spinner1);
 
-                        ArrayAdapter<String>adapter = new ArrayAdapter<String>(getActivity(),
-                                android.R.layout.simple_spinner_item,list);
+                        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(),
+                                android.R.layout.simple_spinner_item, list);
 
                         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                         dropdown.setAdapter(adapter);
 
                     }
-                }
 
-                if (response.code() == 404) {
-                    Toast.makeText(getActivity(),
-                            "erreur", Toast.LENGTH_LONG).show();
+
+                    if (response.code() == 404) {
+                        Toast.makeText(getActivity(),
+                                "erreur", Toast.LENGTH_LONG).show();
+                    }
                 }
             }
-
             @Override
             public void onFailure(Call<List<Categories>> call, Throwable t) {
                 Toast.makeText(getActivity(),

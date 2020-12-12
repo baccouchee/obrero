@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -32,6 +33,9 @@ public class CategorieFragment extends Fragment {
     private Retrofit retrofit;
     private RetrofitInterface retrofitInterface;
     private String BASE_URL = "http://10.0.2.2:3000";
+
+    private String test6;
+
     ListView listView;
 String test5;
     @Nullable
@@ -50,8 +54,6 @@ String test5;
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         retrofitInterface = retrofit.create(RetrofitInterface.class);
-
-        String[] listetest = new String[]{"test", "test2", "test3"};
         List<String> list = new ArrayList<String>();
         Call<List<Categories>> call = retrofitInterface.getCategories();
         call.enqueue(new Callback<List<Categories>>() {
@@ -66,6 +68,40 @@ String test5;
                         ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(),
                                 android.R.layout.simple_list_item_1,list);
                         listView.setAdapter(adapter);
+                        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                            @Override
+                            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                                String item = (String) listView.getItemAtPosition(position);
+                                Call<List<Prestation>> call1 = retrofitInterface.getAllPrestation();
+                                call1.enqueue(new Callback<List<Prestation>>() {
+                                    @Override
+                                    public void onResponse(Call<List<Prestation>> call, Response<List<Prestation>> response) {
+                                        if (response.code() == 200) {
+                                            List<Prestation> prestations = response.body();
+                                            for (Prestation pres : prestations) {
+                                                test6 = pres.getNomC();
+if (test6.equals(item)){
+    PrestationByCatFragment fragment = new PrestationByCatFragment();
+    getActivity().getSupportFragmentManager().beginTransaction()
+            .replace(R.id.fragment_categorie, fragment, "findThisFragment")
+            .addToBackStack(null)
+            .commit();
+
+          }
+
+                                            }
+                                        }
+                                    }
+
+
+                                    @Override
+                                    public void onFailure(Call<List<Prestation>> call, Throwable t) {
+                                        Toast.makeText(getActivity(),
+                                                "erreur", Toast.LENGTH_LONG).show();
+                                    }
+                                });
+                            }
+                        });
 
                     }
                 }
