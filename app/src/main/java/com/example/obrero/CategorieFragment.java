@@ -36,6 +36,7 @@ public class CategorieFragment extends Fragment {
     private String BASE_URL = "http://10.0.2.2:3000";
 
     private String test6;
+    private int test;
 Spinner spinner;
     ListView listView;
 String test5;
@@ -82,15 +83,23 @@ String test5;
                                             List<Prestation> prestations = response.body();
                                             for (Prestation pres : prestations) {
                                                 test6 = pres.getNomC();
+                                                test = pres.getIdPres();
+                                                PrestationByCatFragment fragment = new PrestationByCatFragment();
                                                 if (test6.equals(item)){
-                                                    PrestationByCatFragment fragment = new PrestationByCatFragment();
+
                                                     Bundle bundle1 = new Bundle();
                                                     bundle1.putString("key2", item);
+                                                    bundle1.putInt("key3", test);
                                                     fragment.setArguments(bundle1);
                                                     getActivity().getSupportFragmentManager().beginTransaction()
-                                                            .replace(R.id.fragment_categorie, fragment, "findThisFragment")
+                                                            .replace(R.id.fragment_categorie, fragment, "takriz")
                                                             .addToBackStack(null)
                                                             .commit();
+
+
+
+                                                }
+                                                    else {
 
                                                 }
 

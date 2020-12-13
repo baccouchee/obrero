@@ -17,7 +17,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Obrero"
         android:usesCleartextTraffic="true">
-        <activity android:name=".GetPro"></activity>
+        <activity android:name=".GetPro"
+                  android:theme="@style/Theme.Design.NoActionBar"/>
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").

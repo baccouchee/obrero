@@ -25,6 +25,9 @@ public interface RetrofitInterface {
     @GET("/Users/{id}")
     Call<List<LoginResult>> getUsers(@Path("id") int idUser);
 
+    @GET("/prestation/{id}")
+    Call<List<Prestation>> getPresById(@Path("id") int idPres);
+
     @GET("/Categories")
     Call<List<Categories>> getCategories();
 
