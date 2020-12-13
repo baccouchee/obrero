@@ -9,12 +9,31 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
 
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
+
 public class GetPro extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
+
+    private Retrofit retrofit;
+    private RetrofitInterface retrofitInterface;
+    private String BASE_URL = "http://10.0.2.2:3000";
+
     private DrawerLayout drawer;
+
+    TextView NomPres;
+    TextView DescPres;
+    TextView TarifPres;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,6 +51,49 @@ public class GetPro extends AppCompatActivity implements NavigationView.OnNaviga
 
         drawer.addDrawerListener(toggle);
         toggle.syncState();
+
+        Bundle extras = getIntent().getExtras();
+        int value = extras.getInt("key4");
+
+
+        retrofit = new Retrofit.Builder()
+                .baseUrl(BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        retrofitInterface = retrofit.create(RetrofitInterface.class);
+
+        NomPres = this.findViewById(R.id.nomPres);
+        DescPres = this.findViewById(R.id.descPres);
+        TarifPres = this.findViewById(R.id.tarifPres);
+
+
+        Call<List<Prestation>> call = retrofitInterface.getPresById(value);
+        call.enqueue(new Callback<List<Prestation>>() {
+            @Override
+            public void onResponse(Call<List<Prestation>> call, Response<List<Prestation>> response) {
+                if (response.code() == 200) {
+                    List<Prestation> prestations = response.body();
+                    for (Prestation post : prestations){
+                        String content = "";
+                        String content2 = "";
+                        String content3 = "";
+                        content2 += "" + post.getNom();
+                        content3 += "" + post.getDescription();
+                        content += "" + post.getTarif() + "\n";
+
+                        NomPres.append(content2);
+                        DescPres.append(content3);
+                        TarifPres.append(content);
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Prestation>> call, Throwable t) {
+
+            }
+        });
+
     }
 
     @Override
