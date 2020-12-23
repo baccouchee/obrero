@@ -34,14 +34,25 @@ public interface RetrofitInterface {
     @GET("/prestation")
     Call<List<Prestation>> getAllPrestation();
 
+    @GET("/proo")
+    Call<List<LoginResult>> getAllPro();
+
+    @GET("/Users")
+    Call<List<LoginResult>> getAllUsers();
+
     @GET("/pres/{nomC}")
     Call<List<Prestation>> getPrestation(@Path("nomC") String nomC);
 
     @POST("/getpro/{id}")
     Call<Void> getPro(@Body HashMap<String, String> map, @Path("id") int idUser);
 
+    @POST("/commande/{idUs}&{idP}")
+    Call<Void> commander(@Path("idUs") int idUs, @Path("idP") int idP);
 
     @DELETE("/Users/{id}")
     Call<ResponseBody>  deleteUsers(@Path("id") int idUser);
+
+    @GET("/commande/{idUs}")
+    Call<List<Commande>> mesCommandes(@Path("idUs") int idUs);
 
 }

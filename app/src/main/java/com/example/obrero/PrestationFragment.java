@@ -47,6 +47,7 @@ public class PrestationFragment extends Fragment {
     Button supp2;
     Spinner dropdown;
     Button vald;
+    Button comm;
 
     @Nullable
     @Override
@@ -63,9 +64,11 @@ public class PrestationFragment extends Fragment {
         supp1= getActivity().findViewById(R.id.pres);
         supp2= getActivity().findViewById(R.id.supp);
         Bundle bundle1 = this.getArguments();
-        int i = bundle1.getInt("key1");
+        int i = bundle1.getInt("key");
+        comm = getActivity().findViewById(R.id.commande2);
         supp1.setVisibility(View.GONE);
         supp2.setVisibility(View.GONE);
+        comm.setVisibility(View.GONE);
 
         retrofit = new Retrofit.Builder()
                 .baseUrl(BASE_URL)

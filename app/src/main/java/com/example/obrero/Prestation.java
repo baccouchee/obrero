@@ -1,17 +1,27 @@
 package com.example.obrero;
 
+import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 public class Prestation {
 
     private int idPres;
-    private String Nom;
+    private String NomP;
     private String description;
     private float tarif;
-    private int idU;
+
     private int nbnote;
     private String photo;
     private String nomC;
+    private int idU;
+
+    public int getIdU() {
+        return idU;
+    }
+
+    public void setIdU(int idU) {
+        this.idU = idU;
+    }
 
     @SerializedName("body")
     public int getIdPres() {
@@ -22,12 +32,12 @@ public class Prestation {
         this.idPres = idPres;
     }
 
-    public String getNom() {
-        return Nom;
+    public String getNomP() {
+        return NomP;
     }
 
-    public void setNom(String nom) {
-        this.Nom = Nom;
+    public void setNom(String NomP) {
+        this.NomP = NomP;
     }
 
     public String getDescription() {
@@ -44,14 +54,6 @@ public class Prestation {
 
     public void setTarif(float tarif) {
         this.tarif = tarif;
-    }
-
-    public int getIdU() {
-        return idU;
-    }
-
-    public void setIdU(int idU) {
-        this.idU = idU;
     }
 
     public int getNbnote() {

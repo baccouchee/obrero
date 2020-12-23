@@ -1,7 +1,6 @@
 package com.example.obrero;
 
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -9,8 +8,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.FrameLayout;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -49,6 +46,7 @@ public class PrestationByCatFragment extends Fragment {
         Bundle bundle1 = this.getArguments();
         String i = bundle1.getString("key2");
         int ii = bundle1.getInt("key3");
+        int iii = bundle1.getInt("key");
         retrofit = new Retrofit.Builder()
                 .baseUrl(BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
@@ -56,7 +54,7 @@ public class PrestationByCatFragment extends Fragment {
 
         retrofitInterface = retrofit.create(RetrofitInterface.class);
         List<String> list2 = new ArrayList<String>();
-        listView = getActivity().findViewById(R.id.listview);
+        listView = getActivity().findViewById(R.id.listcom);
         Call<List<Prestation>> call = retrofitInterface.getPrestation(i);
         call.enqueue(new Callback<List<Prestation>>() {
             @Override
@@ -65,7 +63,7 @@ public class PrestationByCatFragment extends Fragment {
 
                     List<Prestation> prestations = response.body();
                     for (Prestation pres : prestations) {
-                      test = pres.getNom();
+                      test = pres.getNomP();
                       list2.add(test);
                         System.out.println(test);
 
@@ -92,8 +90,11 @@ public class PrestationByCatFragment extends Fragment {
 
 
                                                         Intent intent = new Intent();
+                                                        Intent intent2 = new Intent();
                                                         intent.setClass(getActivity(), GetPro.class);
                                                         intent.putExtra("key4",ii);
+                                                        intent.putExtra("key", iii);
+                                                        System.out.println("test"+iii);
                                                         getActivity().startActivity(intent);
 
 

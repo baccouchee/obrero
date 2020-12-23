@@ -7,8 +7,11 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -33,6 +36,7 @@ public class GetPro extends AppCompatActivity implements NavigationView.OnNaviga
     TextView NomPres;
     TextView DescPres;
     TextView TarifPres;
+    Button commander;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +44,7 @@ public class GetPro extends AppCompatActivity implements NavigationView.OnNaviga
         setContentView(R.layout.activity_get_pro);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        drawer = findViewById(R.id.drawer_layout);
+        drawer = findViewById(R.id.comm);
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar,
@@ -53,9 +57,11 @@ public class GetPro extends AppCompatActivity implements NavigationView.OnNaviga
         toggle.syncState();
 
         Bundle extras = getIntent().getExtras();
+        Bundle extras1 = getIntent().getExtras();
         int value = extras.getInt("key4");
-
-
+        int value1 = extras1.getInt("key");
+        System.out.println("id" + value1);
+        System.out.println(value);
         retrofit = new Retrofit.Builder()
                 .baseUrl(BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
@@ -65,7 +71,7 @@ public class GetPro extends AppCompatActivity implements NavigationView.OnNaviga
         NomPres = this.findViewById(R.id.nomPres);
         DescPres = this.findViewById(R.id.descPres);
         TarifPres = this.findViewById(R.id.tarifPres);
-
+        commander= this.findViewById(R.id.commander);
 
         Call<List<Prestation>> call = retrofitInterface.getPresById(value);
         call.enqueue(new Callback<List<Prestation>>() {
@@ -77,9 +83,9 @@ public class GetPro extends AppCompatActivity implements NavigationView.OnNaviga
                         String content = "";
                         String content2 = "";
                         String content3 = "";
-                        content2 += "" + post.getNom();
+                        content2 += "" + post.getNomP();
                         content3 += "" + post.getDescription();
-                        content += "" + post.getTarif() + "\n";
+                        content += "Tarif: " + post.getTarif() + "DT";
 
                         NomPres.append(content2);
                         DescPres.append(content3);
@@ -94,30 +100,51 @@ public class GetPro extends AppCompatActivity implements NavigationView.OnNaviga
             }
         });
 
+
+        commander.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Call<Void> call1 = retrofitInterface.commander(value1, value);
+                call1.enqueue(new Callback() {
+                    @Override
+                    public void onResponse(Call call, Response response) {
+                        if (response.code() == 200) {
+                            System.out.println("valider");
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call call, Throwable t) {
+                        System.out.println("err");
+                    }
+                });
+            }
+        });
     }
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         Bundle extras = getIntent().getExtras();
-        int value = extras.getInt("key");
-        extras.putInt("key", value);
-
+        int value2 = extras.getInt("key");
+        System.out.println("test" + value2);
         switch (item.getItemId()) {
             case R.id.nav_message:
+                CategorieFragment categorieFragment = new CategorieFragment();
+                categorieFragment.setArguments(extras);
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new CategorieFragment()).commit();
+                        categorieFragment).commit();
                 break;
             case R.id.nav_chat:
                 CompteFragment fragment = new CompteFragment();
-
                 fragment.setArguments(extras);
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                         fragment).commit();
                 break;
             case R.id.nav_profile:
-
+                LocationFragment fragment2 = new LocationFragment();
+                fragment2.setArguments(extras);
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new LocationFragment()).commit();
+                        fragment2).commit();
                 break;
 
             case  R.id.nav_getpro:
@@ -125,7 +152,6 @@ public class GetPro extends AppCompatActivity implements NavigationView.OnNaviga
                 fragment1.setArguments(extras);
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                         fragment1).commit();
-                break;
 
             case R.id.nav_share:
                 Toast.makeText(this, "Share", Toast.LENGTH_SHORT).show();

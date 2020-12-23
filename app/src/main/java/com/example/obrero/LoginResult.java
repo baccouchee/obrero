@@ -2,9 +2,14 @@ package com.example.obrero;
 import com.google.gson.annotations.SerializedName;
 public class LoginResult {
 
-    private int id;
+    private int idUser;
+private int id;
+
+
 
     private String nom;
+
+    private String NomP;
 
     private String adresse;
 
@@ -12,15 +17,23 @@ public class LoginResult {
 
     private String email;
 
-    @SerializedName("body")
-    private String text;
-
-    public int getId() {
-        return id;
+    public String getNomP() {
+        return NomP;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setNomP(String NomP) {
+        NomP = NomP;
+    }
+
+    @SerializedName("body")
+
+
+    public int getIdUser() {
+        return idUser;
+    }
+
+    public void setIdUser(int idUser) {
+        this.idUser = idUser;
     }
 
     public String getNom() {
@@ -53,5 +66,13 @@ public class LoginResult {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }

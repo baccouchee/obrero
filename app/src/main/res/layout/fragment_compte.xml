@@ -62,8 +62,22 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/commande2"
+        app:layout_constraintVertical_bias="0.076" />
+
+    <Button
+        android:id="@+id/commande2"
+        android:layout_width="170dp"
+        android:layout_height="44dp"
+        android:background="@drawable/buttonb"
+        android:text="MES COMMANDES"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/adresse3"
-        app:layout_constraintVertical_bias="0.592" />
+        app:layout_constraintVertical_bias="0.448" />
 
     <Button
         android:id="@+id/supp"

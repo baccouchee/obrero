@@ -37,6 +37,7 @@ public class CategorieFragment extends Fragment {
 
     private String test6;
     private int test;
+    private int id;
 Spinner spinner;
     ListView listView;
 String test5;
@@ -50,7 +51,8 @@ String test5;
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
+        Bundle bundle1 = this.getArguments();
+        int i = bundle1.getInt("key");
         retrofit = new Retrofit.Builder()
                 .baseUrl(BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
@@ -90,14 +92,12 @@ String test5;
                                                     Bundle bundle1 = new Bundle();
                                                     bundle1.putString("key2", item);
                                                     bundle1.putInt("key3", test);
+                                                    bundle1.putInt("key", i);
                                                     fragment.setArguments(bundle1);
                                                     getActivity().getSupportFragmentManager().beginTransaction()
                                                             .replace(R.id.fragment_categorie, fragment, "takriz")
                                                             .addToBackStack(null)
                                                             .commit();
-
-
-
                                                 }
                                                     else {
 
@@ -112,7 +112,7 @@ String test5;
                                     @Override
                                     public void onFailure(Call<List<Prestation>> call, Throwable t) {
                                         Toast.makeText(getActivity(),
-                                                "erreur", Toast.LENGTH_LONG).show();
+                                                "erreurRR", Toast.LENGTH_LONG).show();
                                     }
                                 });
                             }
@@ -134,7 +134,7 @@ String test5;
             @Override
             public void onFailure(Call<List<Categories>> call, Throwable t) {
                 Toast.makeText(getActivity(),
-                        "erreur", Toast.LENGTH_LONG).show();
+                        "erreure", Toast.LENGTH_LONG).show();
             }
         });
 

@@ -35,7 +35,7 @@ public class CompteFragment extends Fragment {
     TextView prenom;
     TextView pemail;
     Button supp;
-
+    Button comm;
     Button pres;
 
     @Nullable
@@ -51,9 +51,8 @@ public class CompteFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         Bundle bundle = this.getArguments();
         int i = bundle.getInt("key");
-
         Bundle bundle1 = new Bundle();
-        bundle1.putInt("key1", i);
+        bundle1.putInt("key", i);
 
 
         retrofit = new Retrofit.Builder()
@@ -160,6 +159,18 @@ supp.setOnClickListener(new View.OnClickListener() {
             }
         });
 
+        comm = getActivity().findViewById(R.id.commande2);
+        comm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MesCommandes fragment = new MesCommandes();
+                fragment.setArguments(bundle1);
+                getActivity().getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.fragment_compte, fragment, "findThisFragment")
+                        .addToBackStack(null)
+                        .commit();
+            }
+        });
 
         super.onViewCreated(view, savedInstanceState);
     }

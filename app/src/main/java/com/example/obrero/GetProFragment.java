@@ -36,7 +36,7 @@ Button suivant;
         System.out.println("ccc"+i);
 
         Bundle bundle1 = new Bundle();
-        bundle1.putInt("key1", i);
+        bundle1.putInt("key", i);
 
 
         suivant = getActivity().findViewById(R.id.suivant);

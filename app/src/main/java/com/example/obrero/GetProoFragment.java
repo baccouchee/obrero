@@ -54,7 +54,7 @@ public class GetProoFragment extends Fragment {
 
         super.onViewCreated(view, savedInstanceState);
         Bundle bundle1 = this.getArguments();
-        int i = bundle1.getInt("key1");
+        int i = bundle1.getInt("key");
 
         retrofit = new Retrofit.Builder()
                 .baseUrl(BASE_URL)
