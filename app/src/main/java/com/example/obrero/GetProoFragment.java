@@ -16,6 +16,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 
@@ -42,17 +43,16 @@ public class GetProoFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_getproo, container, false);
+
         return v;
 
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        suivant = getActivity().findViewById(R.id.suivant);
-        suivant.setVisibility(View.GONE);
-
 
         super.onViewCreated(view, savedInstanceState);
+
         Bundle bundle1 = this.getArguments();
         int i = bundle1.getInt("key");
 
@@ -62,14 +62,59 @@ public class GetProoFragment extends Fragment {
                 .build();
 
         retrofitInterface = retrofit.create(RetrofitInterface.class);
+        suivant = view.findViewById(R.id.suivant);
+        debut = view.findViewById(R.id.debut);
+        fin = view.findViewById(R.id.fin);
+        debut.setOnClickListener(new View.OnClickListener() {
 
-        debut = getActivity().findViewById(R.id.debut);
-        fin = getActivity().findViewById(R.id.fin);
-        valider = getActivity().findViewById(R.id.valider);
+            @Override
+            public void onClick(View v) {
+                // TODO Auto-generated method stub
+                Calendar mcurrentTime = Calendar.getInstance();
+                int hour = mcurrentTime.get(Calendar.HOUR_OF_DAY);
+                int minute = mcurrentTime.get(Calendar.MINUTE);
+
+                TimePickerDialog mTimePicker;
+                mTimePicker = new TimePickerDialog(getActivity(), new TimePickerDialog.OnTimeSetListener() {
+                    @Override
+                    public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
+                        debut.setText(selectedHour+":"+selectedMinute);
+                    }
+                }, hour, minute, true);
+                mTimePicker.setTitle("Horaire de début");
+                mTimePicker.show();
+
+            }
+        });
+        fin.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                // TODO Auto-generated method stub
+                Calendar mcurrentTime = Calendar.getInstance();
+                int hour = mcurrentTime.get(Calendar.HOUR_OF_DAY);
+                int minute = mcurrentTime.get(Calendar.MINUTE);
+
+                TimePickerDialog mTimePicker;
+                mTimePicker = new TimePickerDialog(getActivity(), new TimePickerDialog.OnTimeSetListener() {
+                    @Override
+                    public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
+                        fin.setText(selectedHour+":"+selectedMinute);
+                    }
+                }, hour, minute, true);
+                mTimePicker.setTitle("Horaire de fin");
+                mTimePicker.show();
+
+            }
+        });
+
+        valider = view.findViewById(R.id.valider);
+
         valider.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 HashMap<String, String> map = new HashMap<>();
+
                 test3 = debut.getText().toString();
                 map.put("heureDeb", test3);
                 test4 = fin.getText().toString();

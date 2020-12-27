@@ -14,5 +14,7 @@
     <color name="bluelight">#24c9d5</color>
     <color name="gold">#ebc931</color>
     <color name="red">#FF0000</color>
+    <color name="whiteB">#CCCCCC</color>
+
 
 </resources>

@@ -36,7 +36,7 @@ public class Prestation {
         return NomP;
     }
 
-    public void setNom(String NomP) {
+    public void setNomP(String NomP) {
         this.NomP = NomP;
     }
 

@@ -1,6 +1,7 @@
 package com.example.obrero;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.TextView;
@@ -92,6 +93,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
 
         switch (item.getItemId()) {
+            case R.id.nav_menu:
+                Intent intent = new Intent(this, MainActivity.class);
+                intent.putExtra("key", value);
+                startActivity(intent);
+
             case R.id.nav_message:
                 CategorieFragment categorieFragment = new CategorieFragment();
                 categorieFragment.setArguments(extras);

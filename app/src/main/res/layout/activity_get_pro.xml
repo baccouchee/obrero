@@ -1,115 +1,87 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/comm"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
-    tools:context=".GetPro"
-    tools:openDrawer="end">
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="@color/blue"
-            android:elevation="4dp"
-            android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
-            app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
-        <FrameLayout
-            android:id="@+id/fragment_container"
-            android:background="@color/white"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+    android:background="@drawable/press"
+    android:orientation="vertical"
+    android:elevation="8dp"
+    tools:context=".GetPro">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
+    <ImageView
+        android:adjustViewBounds="true"
+        android:scaleType="fitXY"
+        android:id="@+id/containerimage"
+        android:layout_width="327dp"
+        android:layout_height="160dp"
+        android:background="@drawable/rectangle"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.494"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.218" />
 
-                <ImageView
-                    android:id="@+id/imageView2"
-                    android:layout_width="414dp"
-                    android:layout_height="179dp"
-                    android:background="@drawable/img"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.666"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.0"></ImageView>
 
-                <TextView
-                    android:id="@+id/nomPres"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/heavy"
-                    android:text=""
-                    android:textColor="@color/blue"
-                    android:textSize="25sp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.058"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/imageView2"
-                    app:layout_constraintVertical_bias="0.06" />
-
-                <TextView
-                    android:id="@+id/descPres"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/helvetice"
-                    android:text=""
-                    android:textColor="@color/black"
-                    android:textSize="20sp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.058"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/nomPres"
-                    app:layout_constraintVertical_bias="0.024" />
-
-                <TextView
-                    android:id="@+id/tarifPres"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text=""
-                    android:textColor="@color/grey"
-                    android:textSize="15sp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.058"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/descPres"
-                    app:layout_constraintVertical_bias="0.032" />
-
-                <Button
-                    android:id="@+id/commander"
-                    android:layout_width="127dp"
-                    android:layout_height="48dp"
-                    android:background="@drawable/buttonb"
-                    android:text="commander"
-                    android:fontFamily="@font/helvetice"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.498"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/imageView2"
-                    app:layout_constraintVertical_bias="0.526" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-        </FrameLayout>
-    </LinearLayout>
-    <com.google.android.material.navigation.NavigationView
-        android:id="@+id/nav_view"
-        android:theme="@style/Theme.AppCompat.Light"
+    <TextView
+        android:id="@+id/nomPres"
         android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_gravity="start"
-        app:headerLayout="@layout/nav_header"
-        app:menu="@menu/drawer_menu" />
-</androidx.drawerlayout.widget.DrawerLayout>
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/heavy"
+        android:text="TTTEDST"
+        android:textColor="@color/blue"
+        android:textSize="25sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.184"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/containerimage"
+        app:layout_constraintVertical_bias="0.074" />
+
+    <TextView
+        android:id="@+id/descPres"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/helvetice"
+        android:text="TEEEST"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.171"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/nomPres"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/tarifPres"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TEEEST"
+        android:textColor="@color/grey"
+        android:textSize="15sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.158"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/descPres"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <Button
+        android:id="@+id/commander"
+        android:layout_width="127dp"
+        android:layout_height="48dp"
+        android:background="@drawable/buttonb"
+        android:fontFamily="@font/helvetice"
+        android:text="commander"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.475"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tarifPres"
+        app:layout_constraintVertical_bias="0.323" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -20,15 +20,15 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/fin"
-        app:layout_constraintVertical_bias="0.207" />
+        app:layout_constraintVertical_bias="0.182" />
 
     <EditText
         android:id="@+id/debut"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-
+        android:focusable="false"
         android:ems="10"
-        android:inputType="time"
+        android:hint="Heure de debut"
         android:background="@drawable/intput"
         android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -45,7 +45,8 @@
         android:background="@drawable/intput"
         android:ems="10"
         android:inputType="time"
-
+        android:focusable="false"
+        android:hint="Heure de fin"
         android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -69,5 +70,21 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.326" />
+
+    <TextView
+        android:id="@+id/textv2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:fontFamily="@font/lightt"
+        android:text="Vos horaire de travail"
+        android:textColor="@color/black"
+        android:textSize="25dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.38"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.381" />
 </androidx.constraintlayout.widget.ConstraintLayout>
 

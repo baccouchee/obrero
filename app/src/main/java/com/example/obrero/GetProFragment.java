@@ -19,6 +19,7 @@ import androidx.fragment.app.FragmentTransaction;
 public class GetProFragment extends Fragment {
 
 Button suivant;
+    Bundle bundle1;
 
     @Nullable
     @Override
@@ -35,25 +36,34 @@ Button suivant;
         int i = bundle.getInt("key");
         System.out.println("ccc"+i);
 
-        Bundle bundle1 = new Bundle();
+        bundle1 = new Bundle();
         bundle1.putInt("key", i);
 
+        suivant = view.findViewById(R.id.suivant);
 
-        suivant = getActivity().findViewById(R.id.suivant);
+
+
         suivant.setOnClickListener(new View.OnClickListener() {
             @SuppressLint("ResourceType")
             @Override
             public void onClick(View v) {
-                GetProoFragment fragment = new GetProoFragment();
-                fragment.setArguments(bundle1);
-                getActivity().getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.fragment_getprooo, fragment, "findThisFragment")
-                        .addToBackStack(null)
-                        .commit();
+
+                fragReload();
+
+
 
             }
         });
 
 
+    }
+
+    private void fragReload() {
+        GetProoFragment fragment = new GetProoFragment();
+        fragment.setArguments(bundle1);
+        getActivity().getSupportFragmentManager().beginTransaction()
+                .replace(R.id.fragment_getprooo, fragment)
+                .addToBackStack(null)
+                .commit();
     }
 }

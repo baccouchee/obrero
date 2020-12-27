@@ -14,6 +14,8 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,9 +32,12 @@ public class PrestationByCatFragment extends Fragment {
     private RetrofitInterface retrofitInterface;
     private String BASE_URL = "http://10.0.2.2:3000";
 
-    ListView listView;
+    RecyclerView listView;
     private String test;
+    private String test3;
+    private String test4;
     private int test2;
+    private List<Prestation> lstPres = new ArrayList<>();
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -47,6 +52,7 @@ public class PrestationByCatFragment extends Fragment {
         String i = bundle1.getString("key2");
         int ii = bundle1.getInt("key3");
         int iii = bundle1.getInt("key");
+
         retrofit = new Retrofit.Builder()
                 .baseUrl(BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
@@ -54,7 +60,9 @@ public class PrestationByCatFragment extends Fragment {
 
         retrofitInterface = retrofit.create(RetrofitInterface.class);
         List<String> list2 = new ArrayList<String>();
+
         listView = getActivity().findViewById(R.id.listcom);
+        RecyclerViewAdapter rv = new RecyclerViewAdapter(getContext(),lstPres);
         Call<List<Prestation>> call = retrofitInterface.getPrestation(i);
         call.enqueue(new Callback<List<Prestation>>() {
             @Override
@@ -63,60 +71,22 @@ public class PrestationByCatFragment extends Fragment {
 
                     List<Prestation> prestations = response.body();
                     for (Prestation pres : prestations) {
-                      test = pres.getNomP();
-                      list2.add(test);
-                        System.out.println(test);
+                   Prestation p = new Prestation();
+                   p.setNomP(pres.getNomP());
+                   p.setDescription(pres.getDescription());
+                   p.setPhoto(pres.getPhoto());
+                   p.setTarif(pres.getTarif());
+                   p.setIdPres(pres.getIdPres());
+                   p.setIdU(pres.getIdU());
 
-                        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(),
-                                android.R.layout.simple_list_item_1,list2);
-                        listView.setAdapter(adapter);
-                        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                            @Override
-                            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                                String item = (String) listView.getItemAtPosition(position);
-                                System.out.println(ii);
-                                Call<List<Prestation>> call1 = retrofitInterface.getPresById(ii);
-                                    call1.enqueue(new Callback<List<Prestation>>() {
-                                        @Override
-                                        public void onResponse(Call<List<Prestation>> call, Response<List<Prestation>> response) {
-                                            if (response.code() == 200) {
-                                                List<Prestation> prestations = response.body();
-                                                for (Prestation pres : prestations) {
-                                                    test2 = pres.getIdPres();
+                        lstPres.add(p);
+                        setRvadapter(lstPres);
 
-                                                    if (test2 == ii){
-                                                        ShowPresFragment fragment2 = new ShowPresFragment();
-                                                        Bundle bundle1 = new Bundle();
-
-
-                                                        Intent intent = new Intent();
-                                                        Intent intent2 = new Intent();
-                                                        intent.setClass(getActivity(), GetPro.class);
-                                                        intent.putExtra("key4",ii);
-                                                        intent.putExtra("key", iii);
-                                                        System.out.println("test"+iii);
-                                                        getActivity().startActivity(intent);
-
-
-                                                    }
-
-                                                }
-                                            }
-                                        }
-
-                                        @Override
-                                        public void onFailure(Call<List<Prestation>> call, Throwable t) {
-                                            Toast.makeText(getActivity(),
-                                                    "erreur", Toast.LENGTH_LONG).show();
-                                        }
-                                    });
-                            }
-                        });
                     }
                 }
 
                 if (response.code() == 404) {
-                    listView.setVisibility(View.GONE);
+
                 }
             }
 
@@ -126,5 +96,11 @@ public class PrestationByCatFragment extends Fragment {
                         "erreur", Toast.LENGTH_LONG).show();
             }
         });
+    }
+
+    public void setRvadapter (List<Prestation> lst) {
+        RecyclerViewAdapter myAdapter = new RecyclerViewAdapter(getContext(),lst) ;
+        listView.setLayoutManager(new LinearLayoutManager(getContext()));
+        listView.setAdapter(myAdapter);
     }
 }
