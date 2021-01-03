@@ -140,7 +140,11 @@ test4 = fin.getText().toString();
                             if (response.code() == 200) {
                                 Toast.makeText(getActivity(),
                                         "Upgrade to Pro", Toast.LENGTH_LONG).show();
-                            } else if (response.code() == 404) {
+                            }
+                            else if (response.code() == 403) {
+                                Toast.makeText(getActivity(),
+                                        "Heure de debut doit etre inférieur a l'heure de fin", Toast.LENGTH_LONG).show();}
+                            else if (response.code() == 404) {
                                 Toast.makeText(getActivity(),
                                         "err", Toast.LENGTH_LONG).show();
                             }
