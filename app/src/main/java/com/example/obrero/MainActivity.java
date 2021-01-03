@@ -3,14 +3,8 @@ package com.example.obrero;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.EditText;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,6 +17,14 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.obrero.Adapter.RecyclerViewAdapterSeller;
+import com.example.obrero.Fragment.CategorieFragment;
+import com.example.obrero.Fragment.CompteFragment;
+import com.example.obrero.Fragment.GetProFragment;
+import com.example.obrero.Fragment.LocationFragment;
+import com.example.obrero.Model.Categories;
+import com.example.obrero.Model.LoginResult;
+import com.example.obrero.Model.Prestation;
 import com.google.android.material.navigation.NavigationView;
 
 import java.util.ArrayList;
@@ -83,9 +85,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         p.setAdresse(pres.getAdresse());
                         p.setNomP(pres.getNomP());
                         p.setDescription(pres.getDescription());
-                        System.out.println("desc" + pres.getDescription());
+
                         p.setPhoto(pres.getPhoto());
-                        System.out.println("phote :" + pres.getPhoto());
+
                         p.setTarif(pres.getTarif());
                         p.setIdPres(pres.getIdPres());
                         p.setIdU(pres.getIdU());
@@ -137,8 +139,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         String content2 = "";
                         content2 += "" + post.getNom();
                         content += "" + post.getEmail() + "\n";
-                        System.out.println(content);
-                        System.out.println(content2);
+
                         nom.append(""+ content2);
                         mail.append(""+ content);
 

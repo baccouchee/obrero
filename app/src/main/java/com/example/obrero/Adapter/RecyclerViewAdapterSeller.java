@@ -1,35 +1,33 @@
-package com.example.obrero;
+package com.example.obrero.Adapter;
 
 import android.content.Context;
-
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.content.Intent;
-
-import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Filter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+import com.example.obrero.GetPro;
+import com.example.obrero.Model.Prestation;
+import com.example.obrero.R;
 
-import java.util.ArrayList;
 import java.util.List;
 
-public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.MyViewHolder> {
+public class RecyclerViewAdapterSeller extends RecyclerView.Adapter<RecyclerViewAdapterSeller.MyViewHolder> {
 
     private Context mContext ;
     private List<Prestation> mData ;
     private List<Prestation> filterAdapter ;
     RequestOptions option;
-    Bundle extras;
 
-    public RecyclerViewAdapter(Context mContext, List<Prestation> mData) {
+
+    public RecyclerViewAdapterSeller(Context mContext, List<Prestation> mData) {
         this.mContext = mContext;
         this.mData = mData;
         this.filterAdapter = mData;
@@ -43,14 +41,13 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
         View view ;
         LayoutInflater inflater = LayoutInflater.from(mContext);
-        view = inflater.inflate(R.layout.cardview,parent,false) ;
+        view = inflater.inflate(R.layout.cardviewseller,parent,false) ;
         final MyViewHolder viewHolder = new MyViewHolder(view) ;
         viewHolder.view_container.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 Intent i = new Intent(mContext, GetPro.class);
-                i.putExtra("key", mData.get(viewHolder.getAdapterPosition()).getIdConnecter());
                 i.putExtra("campaign_img",mData.get(viewHolder.getAdapterPosition()).getPhoto());
                 i.putExtra("campaign_name",mData.get(viewHolder.getAdapterPosition()).getNomP());
                 i.putExtra("campaign_description",mData.get(viewHolder.getAdapterPosition()).getDescription());
@@ -82,7 +79,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     @Override
     public int getItemCount() {
-        System.out.println(mData.size());
+
         return  filterAdapter.size();
     }
 
@@ -98,50 +95,12 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
         public MyViewHolder(View itemView) {
             super(itemView);
-            view_container = itemView.findViewById(R.id.containerimage);
-            tv_name = itemView.findViewById(R.id.nomPre);
-            tv_desc = itemView.findViewById(R.id.descPre);
-            img_thumbnail = itemView.findViewById(R.id.image_view);
+            view_container = itemView.findViewById(R.id.containerimageB);
+            tv_name = itemView.findViewById(R.id.nomPreB);
+            tv_desc = itemView.findViewById(R.id.descPreB);
+            img_thumbnail = itemView.findViewById(R.id.image_viewB);
 
         }
     }
 
-    public int getSize(){
-        System.out.println(filterAdapter.size());
-        return filterAdapter.size();
-
     }
-
-    public Filter getFilter(){
-        return new Filter() {
-            @Override
-            protected FilterResults performFiltering(CharSequence constraint) {
-
-
-                String key = constraint.toString();
-                if (key.isEmpty()){
-                    filterAdapter = mData;
-                }
-                else {
-                    List<Prestation> lstPres = new ArrayList<>();
-                    for (Prestation p : mData){
-                        if(p.getNomP().toLowerCase().contains(key.toLowerCase())){
-                            lstPres.add(p);
-                        }
-                    }
-
-                    filterAdapter = lstPres;
-                }
-                FilterResults filterResults = new FilterResults();
-                filterResults.values = filterAdapter;
-                return filterResults;
-            }
-
-            @Override
-            protected void publishResults(CharSequence constraint, FilterResults results) {
-                filterAdapter = (List<Prestation>)results.values;
-            }
-        };
-    }
-
-}

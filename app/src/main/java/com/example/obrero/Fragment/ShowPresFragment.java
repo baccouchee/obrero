@@ -1,4 +1,4 @@
-package com.example.obrero;
+package com.example.obrero.Fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,6 +12,9 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+
+import com.example.obrero.R;
+import com.example.obrero.RetrofitInterface;
 
 import java.util.List;
 

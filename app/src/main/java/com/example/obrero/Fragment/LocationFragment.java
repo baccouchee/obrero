@@ -1,4 +1,4 @@
-package com.example.obrero;
+package com.example.obrero.Fragment;
 
 import android.content.Context;
 import android.location.Address;
@@ -13,6 +13,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.example.obrero.Model.LoginResult;
+import com.example.obrero.R;
+import com.example.obrero.RetrofitInterface;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -21,7 +24,6 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -78,8 +80,7 @@ public class LocationFragment extends Fragment implements OnMapReadyCallback {
                     for (LoginResult user : users) {
                         adresse = user.getAdresse();
                         nomP = user.getNomP();
-                        System.out.println(adresse);
-                        System.out.println(nomP);
+
                         try {
                             address = coder.getFromLocationName(adresse, 5);
                             Address location = address.get(0);
@@ -117,8 +118,7 @@ public class LocationFragment extends Fragment implements OnMapReadyCallback {
             //Address location = address.get(0);
             //double latitude = location.getLatitude();
             //double langitude = location.getLongitude();
-            //System.out.println(langitude);
-            //System.out.println(latitude);
+
 
 
     }

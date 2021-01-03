@@ -15,6 +15,8 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+import com.example.obrero.Model.Prestation;
+import com.example.obrero.Model.note;
 
 import java.util.HashMap;
 import java.util.List;

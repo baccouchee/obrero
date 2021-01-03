@@ -1,4 +1,4 @@
-package com.example.obrero;
+package com.example.obrero.Model;
 
 import com.google.gson.annotations.SerializedName;
 

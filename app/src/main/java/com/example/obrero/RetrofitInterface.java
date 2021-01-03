@@ -1,5 +1,11 @@
 package com.example.obrero;
 
+import com.example.obrero.Model.Categories;
+import com.example.obrero.Model.Commande;
+import com.example.obrero.Model.LoginResult;
+import com.example.obrero.Model.Prestation;
+import com.example.obrero.Model.note;
+
 import java.util.HashMap;
 import java.util.List;
 

@@ -1,6 +1,5 @@
-package com.example.obrero;
+package com.example.obrero.Fragment;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,18 +8,20 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.example.obrero.Model.Categories;
+import com.example.obrero.R;
+import com.example.obrero.RetrofitInterface;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -93,7 +94,7 @@ public class PrestationFragment extends Fragment {
 
                         test5 = post.getNom();
                         list.add(test5);
-                        System.out.println(list);
+
                         dropdown = getActivity().findViewById(R.id.spinner1);
 
                         ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(),

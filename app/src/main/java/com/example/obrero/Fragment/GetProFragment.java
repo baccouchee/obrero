@@ -1,8 +1,7 @@
-package com.example.obrero;
+package com.example.obrero.Fragment;
 
 
 import android.annotation.SuppressLint;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,10 +10,9 @@ import android.widget.Button;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
+
+import com.example.obrero.R;
 
 public class GetProFragment extends Fragment {
 
@@ -34,7 +32,7 @@ Button suivant;
         super.onViewCreated(view, savedInstanceState);
         Bundle bundle = this.getArguments();
         int i = bundle.getInt("key");
-        System.out.println("ccc"+i);
+
 
         bundle1 = new Bundle();
         bundle1.putInt("key", i);

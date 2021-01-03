@@ -1,29 +1,25 @@
-package com.example.obrero;
+package com.example.obrero.Fragment;
 
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.EditText;
-import android.widget.ListView;
-import android.widget.SearchView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.view.MenuItemCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.obrero.Adapter.RecyclerViewAdapter;
+import com.example.obrero.Model.Prestation;
+import com.example.obrero.R;
+import com.example.obrero.RetrofitInterface;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,4 +1,4 @@
-package com.example.obrero;
+package com.example.obrero.Fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -14,7 +14,12 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import java.util.ArrayList;
+import com.example.obrero.MesCommandes;
+import com.example.obrero.Model.LoginResult;
+import com.example.obrero.R;
+import com.example.obrero.RetrofitInterface;
+import com.example.obrero.login;
+
 import java.util.List;
 
 import okhttp3.ResponseBody;
@@ -87,7 +92,7 @@ public class CompteFragment extends Fragment {
                         content += "Votre adresse :" + post.getAdresse() + "\n";
                         etat = post.getRole();
                         pres = getActivity().findViewById(R.id.pres);
-                        System.out.println(etat);
+
                         if (etat == 1)
                         {
                             pres.setVisibility(View.GONE);

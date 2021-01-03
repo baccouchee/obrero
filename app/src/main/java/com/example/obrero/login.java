@@ -9,7 +9,6 @@ import android.widget.Toast;
 
 import java.util.HashMap;
 
-import okhttp3.OkHttpClient;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -18,8 +17,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
+import com.example.obrero.Model.LoginResult;
 
 public class login extends AppCompatActivity {
 
@@ -69,7 +67,7 @@ public class login extends AppCompatActivity {
 
                             LoginResult result = response.body();
                             idU = result.getId();
-                            System.out.println(idU);
+
                             Intent intent = new Intent(login.this, MainActivity.class);
                             intent.putExtra("key", idU);
                             startActivity(intent);

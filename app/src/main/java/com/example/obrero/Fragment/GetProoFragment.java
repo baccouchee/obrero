@@ -1,4 +1,4 @@
-package com.example.obrero;
+package com.example.obrero.Fragment;
 
 
 import android.app.TimePickerDialog;
@@ -15,6 +15,9 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+
+import com.example.obrero.R;
+import com.example.obrero.RetrofitInterface;
 
 import java.util.Calendar;
 import java.util.Date;

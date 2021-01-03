@@ -1,4 +1,4 @@
-package com.example.obrero;
+package com.example.obrero.Adapter;
 
 import android.content.Context;
 import android.content.Intent;
@@ -13,6 +13,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+import com.example.obrero.Model.Categories;
+import com.example.obrero.MainActivity;
+import com.example.obrero.R;
 
 import java.util.List;
 
@@ -63,7 +66,7 @@ public class RecyclerViewCatAdapter extends RecyclerView.Adapter<RecyclerViewCat
 
     @Override
     public int getItemCount() {
-        System.out.println(mData.size());
+
         return mData.size();
 
     }
