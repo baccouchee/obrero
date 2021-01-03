@@ -3,7 +3,14 @@ package com.example.obrero;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -13,9 +20,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.navigation.NavigationView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -32,6 +42,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private Retrofit retrofit;
     private RetrofitInterface retrofitInterface;
     private String BASE_URL = "http://10.0.2.2:3000";
+    private int value;
+    Bundle extras;
+    RecyclerView listView;
+    EditText searchView;
+    CharSequence search="";
+    private List<Prestation> lstPres = new ArrayList<>();
+    RecyclerViewAdapterSeller myAdapter;
+    private List<Categories> lstCat = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,23 +64,66 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
-    }
+        retrofit = new Retrofit.Builder()
+                .baseUrl(BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        retrofitInterface = retrofit.create(RetrofitInterface.class);
 
+        listView = findViewById(R.id.bestseller);
+        Call<List<Prestation>> call = retrofitInterface.getAllPrestation();
+        call.enqueue(new Callback<List<Prestation>>() {
+            @Override
+            public void onResponse(Call<List<Prestation>> call, Response<List<Prestation>> response) {
+                if (response.code() == 200) {
+
+                    List<Prestation> prestations = response.body();
+                    for (Prestation pres : prestations) {
+                        Prestation p = new Prestation();
+                        p.setAdresse(pres.getAdresse());
+                        p.setNomP(pres.getNomP());
+                        p.setDescription(pres.getDescription());
+                        System.out.println("desc" + pres.getDescription());
+                        p.setPhoto(pres.getPhoto());
+                        System.out.println("phote :" + pres.getPhoto());
+                        p.setTarif(pres.getTarif());
+                        p.setIdPres(pres.getIdPres());
+                        p.setIdU(pres.getIdU());
+                        listView.setLayoutManager(new LinearLayoutManager(getBaseContext(),LinearLayoutManager.HORIZONTAL, false));
+                        myAdapter = new RecyclerViewAdapterSeller(getBaseContext(), lstPres);
+                        lstPres.add(p);
+                        listView.setAdapter(myAdapter);
+
+                    }
+
+                    if (response.code() == 404) {
+
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Prestation>> call, Throwable t) {
+
+            }
+        });
+
+    }
 
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-
         retrofit = new Retrofit.Builder()
                 .baseUrl(BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
         retrofitInterface = retrofit.create(RetrofitInterface.class);
-        mail = this.findViewById(R.id.mail);
-        nom = this.findViewById(R.id.nom);
-        Bundle extras = getIntent().getExtras();
-        int value = extras.getInt("key");
+        mail =findViewById(R.id.mail);
+        nom = findViewById(R.id.nom);
+        extras = getIntent().getExtras();
+        value = extras.getInt("key");
+
         extras.putInt("key", value);
         Call<List<LoginResult>> call = retrofitInterface.getUsers(value);
         call.enqueue(new Callback<List<LoginResult>>() {
@@ -77,9 +138,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         content2 += "" + post.getNom();
                         content += "" + post.getEmail() + "\n";
                         System.out.println(content);
-
-                        nom.append(content2);
-                        mail.append(content);
+                        System.out.println(content2);
+                        nom.append(""+ content2);
+                        mail.append(""+ content);
 
                     }
                 }
@@ -90,6 +151,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
             }
         });
+
 
 
         switch (item.getItemId()) {
@@ -143,4 +205,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             super.onBackPressed();
         }
     }
+
+
 }

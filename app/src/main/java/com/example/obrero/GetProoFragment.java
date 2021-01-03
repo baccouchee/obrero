@@ -17,6 +17,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -115,10 +116,11 @@ public class GetProoFragment extends Fragment {
             public void onClick(View v) {
                 HashMap<String, String> map = new HashMap<>();
 
-                test3 = debut.getText().toString();
+test3 = debut.getText().toString();
+test4 = fin.getText().toString();
                 map.put("heureDeb", test3);
-                test4 = fin.getText().toString();
                 map.put("heureFin", test4);
+
 
                 if (test3.equals("")){Toast.makeText(getActivity(),
                         "Verfifier votre date de debut", Toast.LENGTH_LONG).show();}

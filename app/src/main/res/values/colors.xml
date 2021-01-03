@@ -15,6 +15,7 @@
     <color name="gold">#ebc931</color>
     <color name="red">#FF0000</color>
     <color name="whiteB">#CCCCCC</color>
+    <color name="whitelight">#EAEAEA</color>
 
 
 </resources>

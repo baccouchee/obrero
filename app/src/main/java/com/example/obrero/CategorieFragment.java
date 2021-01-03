@@ -20,6 +20,8 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.widget.LinearLayoutCompat;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,10 +39,11 @@ public class CategorieFragment extends Fragment {
 
     private String test6;
     private int test;
-    private int id;
-Spinner spinner;
-    ListView listView;
-String test5;
+
+    Spinner spinner;
+    String test5;
+
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -58,6 +61,8 @@ String test5;
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         retrofitInterface = retrofit.create(RetrofitInterface.class);
+
+
         List<String> list = new ArrayList<String>();
         Call<List<Categories>> call = retrofitInterface.getCategories();
         call.enqueue(new Callback<List<Categories>>() {
@@ -65,10 +70,12 @@ String test5;
             public void onResponse(Call<List<Categories>> call, Response<List<Categories>> response) {
                 if (response.code() == 200) {
                     List<Categories> categories = response.body();
+
                     for (Categories post : categories) {
+
                         test5 = post.getNom();
                         list.add(test5);
-                        spinner = getActivity().findViewById(R.id.spinner);
+                        spinner = getActivity().findViewById(R.id.spinner2);
                         ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(),
                                 android.R.layout.simple_spinner_item,list);
                         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -84,9 +91,11 @@ String test5;
                                         if (response.code() == 200) {
                                             List<Prestation> prestations = response.body();
                                             for (Prestation pres : prestations) {
+
                                                 test6 = pres.getNomC();
                                                 test = pres.getIdPres();
                                                 PrestationByCatFragment fragment = new PrestationByCatFragment();
+
                                                 if (test6.equals(item)){
 
                                                     Bundle bundle1 = new Bundle();
@@ -95,7 +104,7 @@ String test5;
                                                     bundle1.putInt("key", i);
                                                     fragment.setArguments(bundle1);
                                                     getActivity().getSupportFragmentManager().beginTransaction()
-                                                            .replace(R.id.fragment_categorie, fragment, "takriz")
+                                                            .replace(R.id.fragment_categorie, fragment, "test")
                                                             .addToBackStack(null)
                                                             .commit();
                                                 }
@@ -139,4 +148,9 @@ String test5;
         });
 
     }
+
+
+
+
+
 }

@@ -13,6 +13,8 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -31,14 +33,13 @@ public class MesCommandes extends Fragment {
     private RetrofitInterface retrofitInterface;
     private String BASE_URL = "http://10.0.2.2:3000";
 
-    ListView listView;
+    RecyclerView listView;
     private String test;
     private int test2;
     private String date;
-    Button supp;
-    Button comm;
-    Button pres;
     private String nom;
+    private List<Commande> lstPres = new ArrayList<>();
+    RecyclerViewCommAdapter myAdapter;
 
     @Nullable
     @Override
@@ -53,13 +54,7 @@ public class MesCommandes extends Fragment {
         Bundle bundle1 = this.getArguments();
 
         int ii = bundle1.getInt("key");
-        supp = getActivity().findViewById(R.id.supp);
-        comm = getActivity().findViewById(R.id.commande2);
-        pres = getActivity().findViewById(R.id.pres);
 
-        supp.setVisibility(View.GONE);
-        comm.setVisibility(View.GONE);
-        pres.setVisibility(View.GONE);
 
         retrofit = new Retrofit.Builder()
                 .baseUrl(BASE_URL)
@@ -78,15 +73,17 @@ public class MesCommandes extends Fragment {
                 if (response.code() == 200) {
                     List<Commande> commandes = response.body();
                     for (Commande commande : commandes){
-                    nom = commande.getNomP();
-                    date = commande.getDate().toString();
-                    list3.add(nom);
-
-                        System.out.println("test" + nom);
-                    ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(),
-                            android.R.layout.simple_list_item_1,list3);
-                    listView.setAdapter(adapter);
-                    }
+                        Commande c = new Commande();
+                        c.setDescription(commande.getDescription());
+c.setAdresse(commande.getAdresse());
+c.setNomP(commande.getNomP());
+c.setPhoto(commande.getPhoto());
+c.setIdC(commande.getIdC());
+                        listView.setLayoutManager(new LinearLayoutManager(getContext()));
+                        myAdapter = new RecyclerViewCommAdapter(getContext(),lstPres) ;
+                        lstPres.add(c);
+                        listView.setAdapter(myAdapter);
+                                  }
                 }
             }
 

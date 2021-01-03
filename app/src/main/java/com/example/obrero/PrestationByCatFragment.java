@@ -3,16 +3,24 @@ package com.example.obrero;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.SearchView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.view.MenuItemCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -33,11 +41,12 @@ public class PrestationByCatFragment extends Fragment {
     private String BASE_URL = "http://10.0.2.2:3000";
 
     RecyclerView listView;
-    private String test;
-    private String test3;
-    private String test4;
-    private int test2;
+    EditText searchView;
+    CharSequence search="";
     private List<Prestation> lstPres = new ArrayList<>();
+    RecyclerViewAdapter myAdapter;
+
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -50,8 +59,9 @@ public class PrestationByCatFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         Bundle bundle1 = this.getArguments();
         String i = bundle1.getString("key2");
-        int ii = bundle1.getInt("key3");
-        int iii = bundle1.getInt("key");
+
+        int value1 = bundle1.getInt("key");
+        bundle1.putInt("key", value1);
 
         retrofit = new Retrofit.Builder()
                 .baseUrl(BASE_URL)
@@ -59,10 +69,9 @@ public class PrestationByCatFragment extends Fragment {
                 .build();
 
         retrofitInterface = retrofit.create(RetrofitInterface.class);
-        List<String> list2 = new ArrayList<String>();
+        searchView = getActivity().findViewById(R.id.search_bar);
 
         listView = getActivity().findViewById(R.id.listcom);
-        RecyclerViewAdapter rv = new RecyclerViewAdapter(getContext(),lstPres);
         Call<List<Prestation>> call = retrofitInterface.getPrestation(i);
         call.enqueue(new Callback<List<Prestation>>() {
             @Override
@@ -72,16 +81,36 @@ public class PrestationByCatFragment extends Fragment {
                     List<Prestation> prestations = response.body();
                     for (Prestation pres : prestations) {
                    Prestation p = new Prestation();
+                   p.setIdConnecter(value1);
+                   p.setAdresse(pres.getAdresse());
                    p.setNomP(pres.getNomP());
                    p.setDescription(pres.getDescription());
                    p.setPhoto(pres.getPhoto());
                    p.setTarif(pres.getTarif());
                    p.setIdPres(pres.getIdPres());
                    p.setIdU(pres.getIdU());
-
+                        listView.setLayoutManager(new LinearLayoutManager(getContext()));
+                        myAdapter = new RecyclerViewAdapter(getContext(),lstPres) ;
                         lstPres.add(p);
-                        setRvadapter(lstPres);
+                        listView.setAdapter(myAdapter);
+                        searchView.addTextChangedListener(new TextWatcher() {
+                            @Override
+                            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                                myAdapter.getFilter().filter(s);
+                                search = s;
 
+                            }
+
+                            @Override
+                            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                            }
+
+                            @Override
+                            public void afterTextChanged(Editable s) {
+
+                            }
+                        });
                     }
                 }
 
@@ -96,11 +125,9 @@ public class PrestationByCatFragment extends Fragment {
                         "erreur", Toast.LENGTH_LONG).show();
             }
         });
+
+
+
     }
 
-    public void setRvadapter (List<Prestation> lst) {
-        RecyclerViewAdapter myAdapter = new RecyclerViewAdapter(getContext(),lst) ;
-        listView.setLayoutManager(new LinearLayoutManager(getContext()));
-        listView.setAdapter(myAdapter);
-    }
 }

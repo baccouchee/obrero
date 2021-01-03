@@ -6,9 +6,18 @@ public class Categories {
 
     private int idCat;
     private String nom;
-
+    private String icon;
 
     @SerializedName("body")
+
+    public String getIcon() {
+        return icon;
+    }
+
+    public void setIcon(String icon) {
+        this.icon = icon;
+    }
+
 
 
     public int getIdCat() {

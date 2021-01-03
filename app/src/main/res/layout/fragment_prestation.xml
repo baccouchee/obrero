@@ -5,7 +5,9 @@
     android:id="@+id/fragment_prestation"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/profil" >
+    android:background="@drawable/profil"
+    >
+
 
     <EditText
         android:id="@+id/tarifP"
@@ -14,7 +16,7 @@
         android:background="@drawable/intput"
         android:ems="10"
         android:inputType="numberDecimal"
-        android:text="Tarif"
+        android:hint="Tarif"
         android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -30,7 +32,7 @@
         android:background="@drawable/intput"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="Nom"
+        android:hint="Nom"
         android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -46,7 +48,7 @@
         android:background="@drawable/intput"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="Description"
+        android:hint="Description"
         android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -62,7 +64,7 @@
         android:background="@drawable/intput"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="Photo"
+        android:hint="Photo"
         android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -120,7 +122,6 @@
         android:layout_width="218dp"
         android:layout_height="35dp"
         android:background="@drawable/intput"
-
         android:spinnerMode="dropdown"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

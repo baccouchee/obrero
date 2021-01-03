@@ -6,15 +6,58 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="horizontal"
-    android:background="@color/whiteB">
+    android:background="@color/white">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/listcom"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="4dp"
-        android:scrollbars="vertical"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="188dp" />
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/lightt"
+                android:padding="12dp"
+                android:text="NOS"
+                android:textColor="@color/blue" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/heavy"
+                android:text="SERVICES"
+
+                android:textColor="@color/blue" />
+        </LinearLayout>
+
+
+        <EditText
+            android:id="@+id/search_bar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/input_search"
+            android:drawableStart="@drawable/ic_search"
+            android:ems="10"
+            android:layout_gravity="center"
+            android:hint="Search"
+            android:inputType="textPersonName"
+            android:padding="10dp"
+            android:textColor="@color/grey" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/listcom"
+
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="4dp"
+            android:scrollbars="vertical"
+            tools:layout_editor_absoluteX="0dp"
+            tools:layout_editor_absoluteY="188dp" />
+    </LinearLayout>
 </RelativeLayout>
 

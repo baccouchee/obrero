@@ -17,6 +17,8 @@ private int id;
 
     private String email;
 
+
+    private int role;
     public String getNomP() {
         return NomP;
     }
@@ -25,8 +27,16 @@ private int id;
         NomP = NomP;
     }
 
+
     @SerializedName("body")
 
+    public int getRole() {
+        return role;
+    }
+
+    public void setRole(int role) {
+        this.role = role;
+    }
 
     public int getIdUser() {
         return idUser;

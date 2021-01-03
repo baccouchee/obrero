@@ -1,26 +1,22 @@
 package com.example.obrero;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
-import com.google.android.material.navigation.NavigationView;
 
+import java.util.HashMap;
 import java.util.List;
 
 import retrofit2.Call;
@@ -40,9 +36,14 @@ public class GetPro extends AppCompatActivity{
     TextView NomPres;
     TextView DescPres;
     TextView TarifPres;
+    TextView adresse;
     Button commander;
     ImageView iv;
     RequestOptions option;
+    RatingBar ratingBar;
+    float myRating = 0;
+    private int value;
+    Bundle extras;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,22 +51,6 @@ public class GetPro extends AppCompatActivity{
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         drawer = findViewById(R.id.comm);
-      //  NavigationView navigationView = findViewById(R.id.nav_view);
-       //        navigationView.setNavigationItemSelectedListener(this);
-      //  ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar,
-              //  R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-
-        //The key argument here must match that used in the other activity
-
-
-        //drawer.addDrawerListener(toggle);
-       // toggle.syncState();
-
-        Bundle extras = getIntent().getExtras();
-        Bundle extras1 = getIntent().getExtras();
-        int value = extras.getInt("key4");
-           int value1 = extras1.getInt("key");
-
 
         retrofit = new Retrofit.Builder()
                 .baseUrl(BASE_URL)
@@ -78,30 +63,69 @@ public class GetPro extends AppCompatActivity{
         NomPres = this.findViewById(R.id.nomPres);
         DescPres = this.findViewById(R.id.descPres);
         TarifPres = this.findViewById(R.id.tarifPres);
-        iv = this.findViewById(R.id.containerimage);
+        iv = this.findViewById(R.id.containerimage1);
+        ratingBar = this.findViewById(R.id.ratingBar);
+        adresse = this.findViewById(R.id.localisation);
+
 
         Intent i = getIntent();
         Bundle e = i.getExtras();
-        System.out.println(e.getString("campaign_description"));
-        DescPres.setText(e.getString("campaign_description"));
+
+
+                DescPres.setText(e.getString("campaign_description"));
         NomPres.setText(e.getString("campaign_name"));
+        int ii = e.getInt("key");
+
         Prestation c = new Prestation();
         c.setNomP(NomPres.toString());
         c.setDescription(DescPres.toString());
         c.setTarif(e.getFloat("campaign_tarif"));
         c.setIdU(e.getInt("campaign_idU"));
         c.setIdPres(e.getInt("campaign_idPres"));
-        TarifPres.setText("tarif" + c.getTarif());
-        System.out.println("id user = " + c.getIdU());
-        System.out.println("id pres = " + c.getIdPres());
+        c.setAdresse(e.getString("campaign_adresse"));
+        TarifPres.setText(c.getTarif() +"DT");
+        adresse.setText(c.getAdresse());
+
         Glide.with(this).load("http://10.0.2.2:3000/img/"+e.getString("campaign_img")).centerCrop()
-                .placeholder(R.drawable.rectangle).into(iv);
+                .placeholder(R.drawable.ic_launcher_background).into(iv);
+
+        ratingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
+            @Override
+            public void onRatingChanged(RatingBar ratingBar, float v, boolean fromUser) {
+                int rating = (int) v;
+                String message = null;
+                myRating = ratingBar.getRating();
+                HashMap<String, Float> map = new HashMap<>();
+                map.put("note", myRating);
+                Call<List<note>> call = retrofitInterface.noter(map,c.getIdU(), c.getIdPres());
+                call.enqueue(new Callback<List<note>>() {
+                    @Override
+                    public void onResponse(Call<List<note>> call, Response<List<note>> response) {
+                        if (response.code() == 200){
+                            Toast.makeText(GetPro.this,
+                                    "Merci d'avoir noter" + myRating, Toast.LENGTH_LONG).show();
+                        }
+                        else if (response.code() == 404) {
+                            Toast.makeText(GetPro.this,
+                                    "Errree", Toast.LENGTH_LONG).show();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<List<note>> call, Throwable t) {
+                        Toast.makeText(GetPro.this,
+                                "Errr", Toast.LENGTH_LONG).show();
+                    }
+                });
+            }
+        });
+
 
         commander= this.findViewById(R.id.commander);
         commander.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Call<Void> call1 = retrofitInterface.commander(c.getIdU(), c.getIdPres());
+                Call<Void> call1 = retrofitInterface.commander(ii, c.getIdPres());
                 call1.enqueue(new Callback() {
                     @Override
                     public void onResponse(Call call, Response response) {
@@ -115,7 +139,7 @@ public class GetPro extends AppCompatActivity{
 
                     @Override
                     public void onFailure(Call call, Throwable t) {
-                        System.out.println("err");
+
                     }
                 });
             }

@@ -9,11 +9,29 @@ public class Prestation {
     private String NomP;
     private String description;
     private float tarif;
+    private  int idConnecter;
 
     private int nbnote;
     private String photo;
     private String nomC;
     private int idU;
+    private String adresse;
+
+    public int getIdConnecter() {
+        return idConnecter;
+    }
+
+    public void setIdConnecter(int idConnecter) {
+        this.idConnecter = idConnecter;
+    }
+
+    public String getAdresse() {
+        return adresse;
+    }
+
+    public void setAdresse(String adresse) {
+        this.adresse = adresse;
+    }
 
     public int getIdU() {
         return idU;

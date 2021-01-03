@@ -62,7 +62,7 @@ Button suivant;
         GetProoFragment fragment = new GetProoFragment();
         fragment.setArguments(bundle1);
         getActivity().getSupportFragmentManager().beginTransaction()
-                .replace(R.id.fragment_getprooo, fragment)
+                .replace(((ViewGroup)(getView().getParent())).getId(), fragment)
                 .addToBackStack(null)
                 .commit();
     }

@@ -37,6 +37,7 @@ public class CompteFragment extends Fragment {
     Button supp;
     Button comm;
     Button pres;
+    public int etat;
 
     @Nullable
     @Override
@@ -67,7 +68,7 @@ public class CompteFragment extends Fragment {
         pemail = getActivity().findViewById(R.id.pemail);
         supp = getActivity().findViewById(R.id.supp);
         idU = getId();
-        System.out.println(idU);
+
 
         Call<List<LoginResult>> call = retrofitInterface.getUsers(i);
         call.enqueue(new Callback<List<LoginResult>>() {
@@ -84,8 +85,28 @@ public class CompteFragment extends Fragment {
                         content2 += "" + post.getNom();
                         content3 += "" + post.getEmail();
                         content += "Votre adresse :" + post.getAdresse() + "\n";
+                        etat = post.getRole();
+                        pres = getActivity().findViewById(R.id.pres);
+                        System.out.println(etat);
+                        if (etat == 1)
+                        {
+                            pres.setVisibility(View.GONE);
+                        }
+                        else {
+                            pres.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    PrestationFragment fragment = new PrestationFragment();
+                                    fragment.setArguments(bundle1);
+                                    getActivity().getSupportFragmentManager().beginTransaction()
+                                            .replace(((ViewGroup) (getView().getParent())).getId(), fragment, "findThisFragment")
+                                            .addToBackStack(null)
+                                            .commit();
 
 
+                                }
+                            });
+                        }
                         prenom.append(content2);
                         adresse3.append(content);
                         pemail.append(content3);
@@ -144,20 +165,8 @@ supp.setOnClickListener(new View.OnClickListener() {
         });
 
 
-        pres = getActivity().findViewById(R.id.pres);
-        pres.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                PrestationFragment fragment = new PrestationFragment();
-                fragment.setArguments(bundle1);
-                getActivity().getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.fragment_compte, fragment, "findThisFragment")
-                        .addToBackStack(null)
-                        .commit();
 
 
-            }
-        });
 
         comm = getActivity().findViewById(R.id.commande2);
         comm.setOnClickListener(new View.OnClickListener() {
@@ -166,7 +175,7 @@ supp.setOnClickListener(new View.OnClickListener() {
                 MesCommandes fragment = new MesCommandes();
                 fragment.setArguments(bundle1);
                 getActivity().getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.fragment_compte, fragment, "findThisFragment")
+                        .replace(((ViewGroup)(getView().getParent())).getId(), fragment, "findThisFragment")
                         .addToBackStack(null)
                         .commit();
             }

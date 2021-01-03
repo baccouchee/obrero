@@ -55,4 +55,11 @@ public interface RetrofitInterface {
     @GET("/commande/{idUs}")
     Call<List<Commande>> mesCommandes(@Path("idUs") int idUs);
 
+    @POST("/note/{idU}&{idP}")
+    Call<List<note>> noter(@Body HashMap<String, Float> map, @Path("idU") int idU, @Path("idP") int idP);
+
+    @DELETE("/delcomm/{idC}")
+    Call<ResponseBody>  deleteCommande(@Path("idC") int idC);
+
+
 }

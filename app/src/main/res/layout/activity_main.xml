@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
     tools:context=".MainActivity"
-    tools:openDrawer="start">
+   >
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -24,7 +24,121 @@
             android:id="@+id/fragment_container"
             android:background="@color/white"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent">
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingTop="20dp"
+    android:orientation="vertical">
+<LinearLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+
+    android:orientation="horizontal"
+    >
+    <ImageView
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+  android:layout_marginTop="20dp"
+        android:background="@drawable/dots" />
+    <ImageView
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_marginStart="220dp"
+        android:background="@drawable/logo" />
+
+</LinearLayout>
+    <EditText
+        android:layout_marginTop="20dp"
+        android:id="@+id/search_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/input_search"
+        android:drawableStart="@drawable/ic_search"
+        android:ems="10"
+
+        android:layout_gravity="center"
+        android:hint="Search"
+        android:inputType="textPersonName"
+        android:padding="10dp"
+        android:textColor="@color/grey" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingTop="20dp"
+            android:paddingEnd="20dp"
+            android:paddingStart="20dp"
+                     >
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="1dp"
+
+                android:backgroundTint="@color/blue"
+                app:cardElevation="5dp">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+
+                    >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="5dp"
+                    android:textSize="30dp"
+                    android:textColor="@color/white"
+                    android:paddingEnd="10dp"
+                    android:fontFamily="@font/lightt"
+                    android:text="BEST"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/heavy"
+                    android:paddingStart="5dp"
+                    android:paddingEnd="10dp"
+                    android:textColor="@color/white"
+                    android:textSize="40dp"
+                    android:text="SELLERS"/>
+                    <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="5dp"
+                    android:textSize="20dp"
+                    android:textColor="@color/white"
+                    android:paddingEnd="10dp"
+                    android:fontFamily="@font/lightt"
+                    android:text="Les préstation les "/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingStart="5dp"
+                        android:textSize="20dp"
+                        android:textColor="@color/white"
+                        android:paddingEnd="10dp"
+                        android:fontFamily="@font/lightt"
+                        android:text="plus noté"/>
+
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+<androidx.recyclerview.widget.RecyclerView
+    android:id="@+id/bestseller"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"/>
+
+        </LinearLayout>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="148dp"
+        android:layout_marginTop="50dp"
+        android:background="@drawable/footer" />
+</LinearLayout>
+        </FrameLayout>
     </LinearLayout>
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/nav_view"
@@ -33,5 +147,9 @@
         android:layout_height="match_parent"
         android:layout_gravity="start"
         app:headerLayout="@layout/nav_header"
-        app:menu="@menu/drawer_menu" />
+        app:menu="@menu/drawer_menu"
+        />
+
+
+
 </androidx.drawerlayout.widget.DrawerLayout>
