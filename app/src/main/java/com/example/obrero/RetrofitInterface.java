@@ -67,5 +67,8 @@ public interface RetrofitInterface {
     @DELETE("/delcomm/{idC}")
     Call<ResponseBody>  deleteCommande(@Path("idC") int idC);
 
+    @GET("/nbnote/{idP}")
+    Call<List<Prestation>> nbnote(@Path("idP") int idP);
+
 
 }

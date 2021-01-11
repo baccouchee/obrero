@@ -28,7 +28,8 @@ public class commandeView extends AppCompatActivity {
     private String BASE_URL = "http://10.0.2.2:3000";
 
     private DrawerLayout drawer;
-
+    private int value;
+    Bundle extras;
     TextView NomPres;
     TextView DescPres;
     TextView TarifPres;
@@ -72,7 +73,6 @@ public class commandeView extends AppCompatActivity {
         c.setAdresse(e.getString("commande_adresse"));
         TarifPres.setText(c.getTarif() +"DT");
         adresse.setText(c.getAdresse());
-
         Glide.with(this).load("http://10.0.2.2:3000/img/"+e.getString("commande_img")).centerCrop()
                 .placeholder(R.drawable.ic_launcher_background).into(iv);
 
@@ -87,8 +87,9 @@ public class commandeView extends AppCompatActivity {
                         if (response.code() == 200) {
 
                             Toast.makeText(getBaseContext(),
-                                    "Votre commande a été desactiver", Toast.LENGTH_LONG).show();
+                                    "Votre commande a été supprimer", Toast.LENGTH_LONG).show();
                             Intent intent = new Intent(getBaseContext(), MainActivity.class);
+                            intent.putExtra("key",e.getInt("commande_idU"));
                             startActivity(intent);
 
                         }

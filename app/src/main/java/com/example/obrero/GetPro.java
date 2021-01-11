@@ -109,14 +109,14 @@ public class GetPro extends AppCompatActivity{
                         }
                         else if (response.code() == 404) {
                             Toast.makeText(GetPro.this,
-                                    "Errree", Toast.LENGTH_LONG).show();
+                                    "Merci d'avoir noter", Toast.LENGTH_LONG).show();
                         }
                     }
 
                     @Override
                     public void onFailure(Call<List<note>> call, Throwable t) {
                         Toast.makeText(GetPro.this,
-                                "Errr", Toast.LENGTH_LONG).show();
+                                "Merci d'avoir noter", Toast.LENGTH_LONG).show();
                     }
                 });
             }

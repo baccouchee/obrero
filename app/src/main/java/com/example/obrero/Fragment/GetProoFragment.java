@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import com.example.obrero.R;
@@ -64,6 +65,7 @@ public class GetProoFragment extends Fragment {
                 .baseUrl(BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
+
 
         retrofitInterface = retrofit.create(RetrofitInterface.class);
         suivant = view.findViewById(R.id.suivant);
@@ -150,6 +152,7 @@ test4 = fin.getText().toString();
                             }
 
                         }
+
 
                         @Override
                         public void onFailure(Call<Void> call, Throwable t) {

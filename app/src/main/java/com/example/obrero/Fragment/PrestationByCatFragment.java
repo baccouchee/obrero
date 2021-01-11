@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -21,6 +22,7 @@ import com.example.obrero.Model.Prestation;
 import com.example.obrero.R;
 import com.example.obrero.RetrofitInterface;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -41,8 +43,13 @@ public class PrestationByCatFragment extends Fragment {
     CharSequence search="";
     private List<Prestation> lstPres = new ArrayList<>();
     RecyclerViewAdapter myAdapter;
-
-
+    TextView note;
+    float somme = 0, moy;
+    public ArrayList<Float> liste;
+    public int size;
+    float notee=0;
+    int is2=1;
+   float test;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -65,8 +72,13 @@ public class PrestationByCatFragment extends Fragment {
                 .build();
 
         retrofitInterface = retrofit.create(RetrofitInterface.class);
-        searchView = getActivity().findViewById(R.id.search_bar);
 
+
+         liste = new ArrayList<>();
+
+
+
+        searchView = getActivity().findViewById(R.id.search_bar);
         listView = getActivity().findViewById(R.id.listcom);
         Call<List<Prestation>> call = retrofitInterface.getPrestation(i);
         call.enqueue(new Callback<List<Prestation>>() {
@@ -75,20 +87,62 @@ public class PrestationByCatFragment extends Fragment {
                 if (response.code() == 200) {
 
                     List<Prestation> prestations = response.body();
+                    is2++;
                     for (Prestation pres : prestations) {
-                   Prestation p = new Prestation();
-                   p.setIdConnecter(value1);
-                   p.setAdresse(pres.getAdresse());
-                   p.setNomP(pres.getNomP());
-                   p.setDescription(pres.getDescription());
-                   p.setPhoto(pres.getPhoto());
-                   p.setTarif(pres.getTarif());
-                   p.setIdPres(pres.getIdPres());
-                   p.setIdU(pres.getIdU());
-                        listView.setLayoutManager(new LinearLayoutManager(getContext()));
-                        myAdapter = new RecyclerViewAdapter(getContext(),lstPres) ;
-                        lstPres.add(p);
-                        listView.setAdapter(myAdapter);
+
+                        Call<List<Prestation>> call1 = retrofitInterface.nbnote(pres.getIdPres());
+                        call1.enqueue(new Callback<List<Prestation>>() {
+                            @Override
+                            public void onResponse(Call<List<Prestation>> call, Response<List<Prestation>> response) {
+                                List<Prestation> prestationns = response.body();
+                                for (Prestation pres1 : prestationns) {
+
+                                    liste.add(pres1.getNote());
+                                    size = liste.size();
+
+
+                                }
+
+                                for(int i = 0; i < size; i++)
+                                {
+                                 somme += liste.get(i);
+                                 moy = somme / size;
+                                }
+
+                                notee = moy/is2;
+                                DecimalFormat df = new DecimalFormat();
+                                df.setMaximumFractionDigits(1);
+
+                                note = getActivity().findViewById(R.id.note);
+                                test = Float.parseFloat(df.format(notee));
+
+                                Prestation p = new Prestation();
+                                p.setNote(test);
+                                p.setIdConnecter(value1);
+                                p.setAdresse(pres.getAdresse());
+                                p.setNomP(pres.getNomP());
+                                p.setDescription(pres.getDescription());
+                                p.setPhoto(pres.getPhoto());
+                                p.setTarif(pres.getTarif());
+                                p.setIdPres(pres.getIdPres());
+                                p.setIdU(pres.getIdU());
+                                System.out.println("looool" + p.getNote());
+                                listView.setLayoutManager(new LinearLayoutManager(getContext()));
+                                myAdapter = new RecyclerViewAdapter(getContext(),lstPres) ;
+                                lstPres.add(p);
+                                listView.setAdapter(myAdapter);
+
+                            }
+
+
+                            @Override
+                            public void onFailure(Call<List<Prestation>> call, Throwable t) {
+
+                            }
+                        });
+
+
+
                         searchView.addTextChangedListener(new TextWatcher() {
                             @Override
                             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -125,5 +179,7 @@ public class PrestationByCatFragment extends Fragment {
 
 
     }
+
+
 
 }

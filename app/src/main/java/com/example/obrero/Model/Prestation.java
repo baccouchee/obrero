@@ -10,7 +10,8 @@ public class Prestation {
     private String description;
     private float tarif;
     private  int idConnecter;
-
+float test;
+    private float note;
     private int nbnote;
     private String photo;
     private String nomC;
@@ -41,7 +42,25 @@ public class Prestation {
         this.idU = idU;
     }
 
+
+    public float getTest() {
+        return test;
+    }
+
+    public void setTest(float test) {
+        this.test = test;
+    }
+
     @SerializedName("body")
+
+    public float getNote() {
+        return note;
+    }
+
+    public void setNote(float note) {
+        this.note = note;
+    }
+
     public int getIdPres() {
         return idPres;
     }

@@ -89,7 +89,7 @@ public class CompteFragment extends Fragment {
                         String content3 = "";
                         content2 += "" + post.getNom();
                         content3 += "" + post.getEmail();
-                        content += "Votre adresse :" + post.getAdresse() + "\n";
+                        content += "" + post.getAdresse() + "\n";
                         etat = post.getRole();
                         pres = getActivity().findViewById(R.id.pres);
 

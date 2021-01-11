@@ -73,7 +73,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
         holder.tv_name.setText(mData.get(position).getNomP());
         holder.tv_desc.setText(mData.get(position).getAdresse());
-
+        holder.tv_category.setText(mData.get(position).getNote()+"/5");
 
         // Load Image from the internet and set it into Imageview using Glide
 
@@ -101,6 +101,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
         public MyViewHolder(View itemView) {
             super(itemView);
+            tv_category = itemView.findViewById(R.id.note);
             view_container = itemView.findViewById(R.id.containerimage);
             tv_name = itemView.findViewById(R.id.nomPre);
             tv_desc = itemView.findViewById(R.id.descPre);

@@ -75,7 +75,7 @@
                     android:layout_height="wrap_content"
                     android:drawableStart="@drawable/ic_star"
                     android:fontFamily="@font/lightt"
-                    android:text="1/5"
+                    android:text=""
                     android:textColor="@color/grey" />
             </LinearLayout>
         </LinearLayout>
